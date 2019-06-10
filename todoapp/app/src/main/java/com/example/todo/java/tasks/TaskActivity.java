@@ -13,7 +13,7 @@ public class TaskActivity extends AppCompatActivity {
 
     public static final String TASKS_VIEWMODEL_TAG = "TASKS_VIEWMODEL_TAG";
     private DrawerLayout mDrawerLayout;
-    private TaskViewModel mViewModel;
+    //private TaskViewModel mViewModel;
 
 
     //endregion
