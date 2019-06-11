@@ -28,6 +28,7 @@ dependencies {
     implementation "com.android.support:support-v4:${rootProject.supportLibraryVersion}"
 
     // Unit test
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation "junit:junit:$rootProject.ext.junitVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.ext.runnerVersion"
 

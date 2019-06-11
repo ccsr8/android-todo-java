@@ -10,9 +10,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.todo.java.R;
+import com.example.todo.java.util.ActivityUtils;
 import com.google.android.material.navigation.NavigationView;
 
-public class TaskActivity extends AppCompatActivity {
+public class TasksActivity extends AppCompatActivity {
 
     //region [public members]
 
@@ -23,7 +24,7 @@ public class TaskActivity extends AppCompatActivity {
     //region [private members]
 
     private DrawerLayout mDrawerLayout;
-    private TasksVivewModel mViewModel;
+    private TasksViewModel mViewModel;
 
     //endregion
 
@@ -32,12 +33,19 @@ public class TaskActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task);
+        setContentView(R.layout.activity_tasks);
 
         setupToolbar();
         setupNavigationDrawer();
+
+        TasksFragment tasksFragment = findOrCreateViewFragment();
+
+        mViewModel = findOrCreateViewModel();
     }
 
+    private TasksViewModel findOrCreateViewModel() {
+
+    }
 
     //endregion
 
@@ -82,6 +90,18 @@ public class TaskActivity extends AppCompatActivity {
                         return true;
                     }
                 });
+    }
+
+    private TasksFragment findOrCreateViewFragment() {
+        TasksFragment tasksFragment = (TasksFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.contentFrame);
+        if (tasksFragment == null) {
+            tasksFragment = TasksFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), tasksFragment, R.id.contentFrame);
+        }
+
+        return tasksFragment;
     }
 
     // endregion

@@ -1,4 +1,4 @@
 package com.example.todo.java.tasks;
 
-public class TasksVivewModel {
+public class TasksViewModel {
 }
