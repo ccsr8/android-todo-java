@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.todo.java.R;
+import com.example.todo.java.ViewModelHolder;
 import com.example.todo.java.util.ActivityUtils;
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,18 +34,29 @@ public class TasksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tasks);
+        super.setContentView(R.layout.activity_tasks);
 
-        setupToolbar();
-        setupNavigationDrawer();
+        this.setupToolbar();
+        this.setupNavigationDrawer();
 
-        TasksFragment tasksFragment = findOrCreateViewFragment();
+        TasksFragment tasksFragment = this.findOrCreateViewFragment();
 
-        mViewModel = findOrCreateViewModel();
+        mViewModel = this.findOrCreateViewModel();
     }
 
     private TasksViewModel findOrCreateViewModel() {
+        ViewModelHolder<TasksViewModel> retainedViewModel =
+                (ViewModelHolder<TasksViewModel>) super.getSupportFragmentManager()
+                        .findFragmentByTag(TASKS_VIEWMODEL_TAG);
 
+        if (retainedViewModel != null && retainedViewModel.getViewModel() != null) {
+            return retainedViewModel.getViewModel();
+        } else {
+            TasksViewModel viewModel = new TasksViewModel(
+                    Injection
+
+            );
+        }
     }
 
     //endregion
