@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.example.todo.java.data.Task;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static androidx.core.util.Preconditions.checkNotNull;
@@ -29,10 +30,6 @@ public class TasksRepository implements TasksDataSource {
         this.mTasksLocalDataSource = checkNotNull(tasksLocalDataSource);
     }
 
-    // endregion
-
-    // region [public methods]
-
     public static TasksRepository getInstance(TasksDataSource tasksRemoteDataSource,
                                               TasksDataSource tasksLocalDataSource) {
         if (INSTANCE == null) {
@@ -42,11 +39,76 @@ public class TasksRepository implements TasksDataSource {
         return INSTANCE;
     }
 
+    // endregion
+
+    // region [public methods]
+
     public static void destroyInstance() {
         INSTANCE = null;
     }
 
-    //TODO: getTasks
+    @Override
+    public void getTask(@NonNull String taskId, @NonNull GetTaskCallback callback) {
+
+    }
+
+    @Override
+    public void getTasks(@NonNull LoadTasksCallback callback) {
+
+    }
+
+    @Override
+    public void saveTask(@NonNull Task task) {
+
+    }
+
+    @Override
+    public void completeTask(@NonNull Task task) {
+
+    }
+
+    @Override
+    public void completeTask(@NonNull String taskId) {
+
+    }
+
+    @Override
+    public void activateTask(@NonNull Task task) {
+
+    }
+
+    @Override
+    public void activateTask(@NonNull String taskId) {
+
+    }
+
+    @Override
+    public void clearCompletedTasks() {
+
+    }
+
+    @Override
+    public void refreshTasks() {
+
+    }
+
+    @Override
+    public void deleteAllTasks() {
+        this.mTasksRemoteDataSource.deleteAllTasks();
+        this.mTasksLocalDataSource.deleteAllTasks();
+
+        if (this.mCachedTasks == null) {
+            this.mCachedTasks = new LinkedHashMap<>();
+        }
+
+        this.mCachedTasks.clear();
+    }
+
+    @Override
+    public void deleteTask(@NonNull String taskId) {
+        this.mTasksRemoteDataSource.deleteTask(checkNotNull(taskId));
+        this.mTasksLocalDataSource.deleteTask(checkNotNull(taskId));
+    }
 
     // endregion
 }
