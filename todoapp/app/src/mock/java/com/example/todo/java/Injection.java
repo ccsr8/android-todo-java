@@ -10,6 +10,7 @@ import com.example.todo.java.data.source.local.ToDoDatabase;
 import static androidx.core.util.Preconditions.checkNotNull;
 
 public class Injection {
+
     public static TasksRepository provideTasksRepository(@NonNull Context context) {
         checkNotNull(context);
         ToDoDatabase toDoDatabase = ToDoDatabase.getInstance(context);
@@ -17,4 +18,5 @@ public class Injection {
         // TODO: Create FakeTasksRemoteDataSource
         return TasksRepository.getInstance()
     }
+
 }
