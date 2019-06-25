@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.todo.java.Injection;
 import com.example.todo.java.R;
 import com.example.todo.java.ViewModelHolder;
 import com.example.todo.java.util.ActivityUtils;
@@ -52,10 +53,19 @@ public class TasksActivity extends AppCompatActivity {
         if (retainedViewModel != null && retainedViewModel.getViewModel() != null) {
             return retainedViewModel.getViewModel();
         } else {
-            TasksViewModel viewModel = new TasksViewModel(
-                    Injection
+            //TasksViewModel viewModel = new TasksViewModel(
+            //        Injection.provideTasksRepository(getApplicationContext()),
+             //       getApplicationContext());
 
-            );
+            TasksViewModel viewModel = new TasksViewModel(
+                    Injection.provideTasksRepository(getApplicationContext()),
+                    getApplicationContext());
+
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    ViewModelHolder.createContainer(viewModel),
+                    TASKS_VIEWMODEL_TAG);
+
+            return viewModel;
         }
     }
 
